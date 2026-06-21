@@ -15,7 +15,7 @@
     scroll-behavior:smooth;
 }
 
-/* INTRO */
+/* ================= INTRO ================= */
 #intro{
     position:fixed;
     top:0;
@@ -27,12 +27,26 @@
     justify-content:center;
     align-items:center;
     z-index:9999;
+
+    transition: opacity 1s ease, visibility 1s ease;
 }
 
 #intro h1{
     color:#fff;
-    font-size:5rem;
+    font-size:4.5rem;
     text-align:center;
+    animation: pop 1.2s ease-in-out;
+}
+
+@keyframes pop{
+    0%{
+        transform:scale(0.7);
+        opacity:0;
+    }
+    100%{
+        transform:scale(1);
+        opacity:1;
+    }
 }
 
 .hide{
@@ -40,12 +54,18 @@
     visibility:hidden;
 }
 
-/* MAIN */
+/* ================= MAIN ================= */
 #main-content{
     display:none;
+    animation: fadeIn 1s ease forwards;
 }
 
-/* NAVBAR */
+@keyframes fadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+
+/* ================= NAVBAR ================= */
 .navbar{
     position:fixed;
     top:0;
@@ -81,7 +101,7 @@
     color:#ffd700;
 }
 
-/* HERO */
+/* ================= HERO ================= */
 .hero{
     height:100vh;
     background:url("lib.png") center/cover no-repeat;
@@ -122,7 +142,7 @@
     margin-bottom:20px;
 }
 
-/* BUTTONS */
+/* ================= BUTTONS ================= */
 .btn{
     padding:12px 25px;
     margin:10px;
@@ -142,14 +162,14 @@
     color:white;
 }
 
-/* SECTIONS */
+/* ================= SECTIONS ================= */
 .section-title{
     text-align:center;
     font-size:3rem;
     margin:60px 0 30px;
 }
 
-/* FEATURES */
+/* ================= FEATURES ================= */
 .features{
     padding:80px 8%;
     background:#f8fafc;
@@ -169,13 +189,13 @@
     font-size:18px;
 }
 
-/* SUBSCRIPTION */
+/* ================= SUBSCRIPTION ================= */
 .subscription{
     padding:80px 8%;
     background:#fff;
 }
 
-/* ADDRESS */
+/* ================= ADDRESS ================= */
 .address{
     background:white;
     padding:30px;
@@ -186,7 +206,7 @@
     font-size:18px;
 }
 
-/* LOADER */
+/* ================= LOADER ================= */
 #contactLoader{
     position:fixed;
     top:0;
@@ -198,6 +218,7 @@
     justify-content:center;
     align-items:center;
     z-index:10000;
+    flex-direction:column;
 }
 
 .spinner{
@@ -213,10 +234,11 @@
     100%{transform:rotate(360deg);}
 }
 
-/* MOBILE */
+/* ================= MOBILE ================= */
 @media(max-width:768px){
     .hero-content h1{font-size:3rem;}
     .nav-links{gap:15px;}
+    #intro h1{font-size:2.5rem;}
 }
 
 </style>
@@ -229,6 +251,7 @@
     <h1>WELCOME TO STUDY ZONE LIBRARY</h1>
 </div>
 
+<!-- MAIN CONTENT -->
 <div id="main-content">
 
 <!-- NAVBAR -->
@@ -263,7 +286,6 @@
 <h2 class="section-title">✨ Features</h2>
 
 <div class="features-container">
-
 <div class="feature-card">📶 High Speed WiFi</div>
 <div class="feature-card">❄️ AC Rooms</div>
 <div class="feature-card">🔒 CCTV Security</div>
@@ -273,7 +295,6 @@
 <div class="feature-card">🪑 Comfortable Seating</div>
 <div class="feature-card">💡 Bright Lighting</div>
 <div class="feature-card">🚽 Washroom Facility</div>
-
 </div>
 
 </section>
@@ -284,14 +305,11 @@
 <h2 class="section-title">💰 Subscription Plans</h2>
 
 <div class="features-container">
-
 <div class="feature-card">🪑 Monthly - ₹700</div>
 <div class="feature-card">📚 3 Months - ₹2000</div>
 <div class="feature-card">🏆 6 Months - ₹4000</div>
-
 </div>
 
-<!-- ADDRESS -->
 <div class="address">
 📍 Study Zone Library,<br>
 Muzaffarnagar Town,<br>
@@ -305,20 +323,25 @@ Above Blueberry Café
 
 <!-- LOADER -->
 <div id="contactLoader">
-<div class="spinner"></div>
-<div style="color:white;text-align:center;margin-top:20px;">
-    <h2>Connecting To Owner 📞</h2>
-    <p>Please wait...</p>
-</div>
+    <div class="spinner"></div>
+    <div style="color:white;text-align:center;margin-top:20px;">
+        <h2>Connecting To Owner 📞</h2>
+        <p>Please wait...</p>
+    </div>
 </div>
 
 <script>
 
-window.addEventListener("load",()=>{
-    setTimeout(()=>{
+window.addEventListener("load", () => {
+    setTimeout(() => {
         document.getElementById("intro").classList.add("hide");
-        document.getElementById("main-content").style.display="block";
-    },2500);
+
+        setTimeout(() => {
+            document.getElementById("intro").style.display = "none";
+            document.getElementById("main-content").style.display = "block";
+        }, 1000);
+
+    }, 2500);
 });
 
 function openWhatsApp(){
